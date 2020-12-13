@@ -61,6 +61,7 @@ public static bool PairExists(IEnumerable<long> arr, long sum)
 	return false;
 }
 
+//https://stackoverflow.com/a/56047248/1100988
 public static IEnumerable<IEnumerable<T>> GetSubSequence<T>(List<T> list)
 {
 	return Enumerable.Range(0, list.Count).SelectMany(start => Enumerable.Range(1, list.Count-start).Select(count => list.GetRange(start, count)));
