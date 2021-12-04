@@ -6,7 +6,7 @@
 
 #load "../../shared.linq"
 
-public const int DayNumber = 3;
+public const int DayNumber = 4;
 static async Task Main()
 {
 	await Part1().Dump("Part1");
