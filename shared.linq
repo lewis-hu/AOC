@@ -6,20 +6,12 @@
   <Namespace>Microsoft.Extensions.Configuration</Namespace>
 </Query>
 
-private const int AOC_YEAR = 2022;
-
-static async Task Main()
-{
-	var input = await GetPuzzleInputAsync(1);
-	input.Dump();
-	GetSessionCookie().Dump();
-}
+public static int AOC_YEAR { get; set; }
 
 private static string GetSessionCookie()
 {
 	var builder = new ConfigurationBuilder()
-.AddJsonFile(Path.Join(Path.GetDirectoryName(Util.CurrentQueryPath),"appsettings.json.local"));
-
+.AddJsonFile(Path.Join(Path.GetDirectoryName(Util.CurrentQueryPath), $@"../..","appsettings.json.local"));
 	IConfiguration config = builder.Build();
 	return config.GetSection("cookie").Value.Dump();
 }
@@ -27,10 +19,12 @@ private static string GetSessionCookie()
 public static async Task<string> GetPuzzleInputAsync(int dayNumber, bool isTesting = false)
 {
 	string sessionCookie = GetSessionCookie();
-	if(isTesting) {
+	if(isTesting) 
+	{
 		return await GetTestInputAsync(dayNumber);
 	}
 	var folderPath = GetFolderPath(dayNumber);
+	folderPath.Dump("folderPath");
 	Directory.CreateDirectory(folderPath);
 	var filePath = $@"{folderPath}\input.txt";
 	if (File.Exists(filePath))
@@ -53,8 +47,12 @@ public static async Task<string> GetPuzzleInputAsync(int dayNumber, bool isTesti
 
 		// Initialization.  
 		HttpResponseMessage response = new HttpResponseMessage();
+		if(AOC_YEAR == default(int))
+		{
+			AOC_YEAR = DateTime.Now.Year;
+		}
 
-		// HTTP GET  
+		// HTTP GET
 		response = await client.GetAsync($"{AOC_YEAR}/day/{dayNumber}/input");
 
 		// Verification  
@@ -70,7 +68,7 @@ public static async Task<string> GetPuzzleInputAsync(int dayNumber, bool isTesti
 }
 private static string GetFolderPath(int dayNumber) 
 {
-	return Path.Join(Path.GetDirectoryName(Util.CurrentQueryPath), $@"{AOC_YEAR}\Day{dayNumber}");
+	return Path.Join(Path.GetDirectoryName(Util.CurrentQueryPath));
 }
 public static async Task<string> GetTestInputAsync(int dayNumber)
 {
