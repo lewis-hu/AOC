@@ -6,7 +6,6 @@
 
 #load "../../shared.linq"
 const bool IS_TESTING = false;
-const int DayNumber = 3;
 
 static async Task Main()
 {
