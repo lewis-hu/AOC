@@ -13,18 +13,17 @@ private static string GetSessionCookie()
 	var builder = new ConfigurationBuilder()
 .AddJsonFile(Path.Join(Path.GetDirectoryName(Util.CurrentQueryPath), $@"../..","appsettings.json.local"));
 	IConfiguration config = builder.Build();
-	return config.GetSection("cookie").Value.Dump();
+	return config.GetSection("cookie").Value;
 }
 
 public static async Task<string> GetPuzzleInputAsync(int dayNumber, bool isTesting = false)
 {
 	string sessionCookie = GetSessionCookie();
-	if(isTesting) 
+	if(isTesting)
 	{
 		return await GetTestInputAsync(dayNumber);
 	}
 	var folderPath = GetFolderPath(dayNumber);
-	folderPath.Dump("folderPath");
 	Directory.CreateDirectory(folderPath);
 	var filePath = $@"{folderPath}\input.txt";
 	if (File.Exists(filePath))
