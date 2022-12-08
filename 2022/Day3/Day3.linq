@@ -10,13 +10,14 @@ const int DayNumber = 3;
 
 static async Task Main()
 {
-	await Part1().Dump("Part1");
-	await Part2().Dump("Part2");
+	int dayNumber = int.Parse(Path.GetFileNameWithoutExtension(Util.CurrentQueryPath).Last().ToString());
+	await Part1(dayNumber).Dump("Part1");
+	await Part2(dayNumber).Dump("Part2");
 }
 
-public static async Task<long> Part1()
+public static async Task<long> Part1(int dayNumber)
 {
-	var input = await GetPuzzleInputAsync(DayNumber, IS_TESTING);
+	var input = await GetPuzzleInputAsync(dayNumber, IS_TESTING);
 	List<string> inputList = input.Replace("\r", "").Split("\n", StringSplitOptions.RemoveEmptyEntries).ToList();
 	return inputList
 		.Select(line =>
@@ -33,9 +34,9 @@ private static int CharToNumber(char input)
 				? (((int) input ) - 38 )
 				: (((int) input )-96 );
 }
-public static async Task<long> Part2()
+public static async Task<long> Part2(int dayNumber)
 {
-	var input = await GetPuzzleInputAsync(DayNumber, IS_TESTING);
+	var input = await GetPuzzleInputAsync(dayNumber, IS_TESTING);
 	List<string> inputList = input.Replace("\r", "").Split("\n", StringSplitOptions.RemoveEmptyEntries).ToList();
 	return inputList.
 		Chunk(3)
