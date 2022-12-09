@@ -16,6 +16,11 @@ private static string GetSessionCookie()
 	return config.GetSection("cookie").Value;
 }
 
+public static int GetDayNumberUsingFileName() 
+{
+	return int.Parse(Path.GetFileNameWithoutExtension(Util.CurrentQueryPath).Last().ToString());
+}
+
 public static async Task<string> GetPuzzleInputAsync(int dayNumber, bool isTesting = false)
 {
 	string sessionCookie = GetSessionCookie();
