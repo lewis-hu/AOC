@@ -20,8 +20,8 @@ public static async Task<int> Part1(int dayNumber)
 	var headerSize = 4;
 	for(var i=0; i<input.Length; i++)
 	{
-		var takeFour = input.Skip(i).Take(headerSize);
-		if(takeFour.Distinct().Count() == headerSize)
+		var header = input.Skip(i).Take(headerSize);
+		if(header.Distinct().Count() == headerSize)
 		{
 			return i + headerSize;
 		}
@@ -36,8 +36,8 @@ public static async Task<int> Part2(int dayNumber)
 	var headerSize = 14;
 	for (var i = 0; i < input.Length; i++)
 	{
-		var takeFour = input.Skip(i).Take(headerSize);
-		if (takeFour.Distinct().Count() == headerSize)
+		var header = input.Skip(i).Take(headerSize);
+		if (header.Distinct().Count() == headerSize)
 		{
 			return i + headerSize;
 		}
